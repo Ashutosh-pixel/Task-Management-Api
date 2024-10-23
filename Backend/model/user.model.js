@@ -2,19 +2,28 @@ const mongoose = require('mongoose');
 
 
 const userschema = new mongoose.Schema({
-    fullname: {
+    //works in both authentication
+    displayname: {
         type: String,
         required: true,
     },
-    username: {
+    email: {
         type: String,
+        required: true,
         unique: true,
-        required: true
+
     },
     password: {
         type: String,
-        required: true
+        select: false
     },
+
+    //only for google auth
+    googleId: {
+        type: String,
+        sparse: true,
+        unique: true
+    }
 })
 
 const User = mongoose.model('User', userschema);
